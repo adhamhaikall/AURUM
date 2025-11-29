@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aurum Automotive | Luxury & Performance</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'aurum-black': '#0a0a0a',
+                        'aurum-dark': '#111111',
+                        'aurum-gold': '#D4AF37', // Metallic Gold
+                        'aurum-yellow': '#FFD700', // Bright Yellow
+                        'aurum-accent': '#C5A028',
+                    },
+                    fontFamily: {
+                        'serif': ['Cinzel', 'serif'],
+                        'sans': ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #D4AF37; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #FFD700; 
+        }
+
+        /* Glassmorphism utilities */
+        .glass-panel {
+            background: rgba(20, 20, 20, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        /* Animation utilities */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .gold-gradient-text {
+            background: linear-gradient(to right, #D4AF37, #FFD700, #D4AF37);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: shine 3s linear infinite;
+        }
+
+        @keyframes shine {
+            to {
+                background-position: 200% center;
+            }
+        }
+    </style>
+</head>
+<body class="bg-aurum-black text-gray-200 font-sans antialiased overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-panel border-b border-aurum-gold/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <span class="text-3xl font-serif font-bold text-aurum-gold tracking-widest">AURUM</span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#home" class="hover:text-aurum-yellow transition-colors duration-300 px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="#brands" class="hover:text-aurum-yellow transition-colors duration-300 px-3 py-2 rounded-md text-sm font-medium">Brands</a>
+                        <a href="#models" class="hover:text-aurum-yellow transition-colors duration-300 px-3 py-2 rounded-md text-sm font-medium">Models</a>
+                        <a href="#services" class="hover:text-aurum-yellow transition-colors duration-300 px-3 py-2 rounded-md text-sm font-medium">Customer Services</a>
+                        <a href="#accessories" class="hover:text-aurum-yellow transition-colors duration-300 px-3 py-2 rounded-md text-sm font-medium">Accessories</a>
+                        <a href="#help" class="bg-aurum-gold text-black hover:bg-aurum-yellow px-4 py-2 rounded-none transition-colors duration-300 text-sm font-bold">Help</a>
+                    </div>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="-mr-2 flex md:hidden">
+                    <button type="button" onclick="toggleMobileMenu()" class="inline-flex items-center justify-center p-2 rounded-md text-aurum-gold hover:text-white focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="md:hidden hidden bg-aurum-dark border-b border-aurum-gold/30" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 text-center">
+                <a href="#home" class="text-gray-300 hover:text-aurum-yellow block px-3 py-2 rounded-md text-base font-medium" onclick="toggleMobileMenu()">Home</a>
+                <a href="#brands" class="text-gray-300 hover:text-aurum-yellow block px-3 py-2 rounded-md text-base font-medium" onclick="toggleMobileMenu()">Brands</a>
+                <a href="#models" class="text-gray-300 hover:text-aurum-yellow block px-3 py-2 rounded-md text-base font-medium" onclick="toggleMobileMenu()">Models</a>
+                <a href="#services" class="text-gray-300 hover:text-aurum-yellow block px-3 py-2 rounded-md text-base font-medium" onclick="toggleMobileMenu()">Services</a>
+                <a href="#accessories" class="text-gray-300 hover:text-aurum-yellow block px-3 py-2 rounded-md text-base font-medium" onclick="toggleMobileMenu()">Accessories</a>
+                <a href="#help" class="text-aurum-gold font-bold block px-3 py-2 rounded-md text-base" onclick="toggleMobileMenu()">Help Center</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative h-screen flex items-center justify-center overflow-hidden">
+        <!-- Background Image Overlay -->
+        <div class="absolute inset-0 z-0">
+            <!-- Using a dark sports car image -->
+            <img src="https://images.unsplash.com/photo-1503376763036-066120622c74?q=80&w=2070&auto=format&fit=crop" 
+                 class="w-full h-full object-cover opacity-60" alt="Luxury Car Background">
+            <div class="absolute inset-0 bg-gradient-to-b from-aurum-black/80 via-transparent to-aurum-black"></div>
+        </div>
+
+        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto fade-in-up">
+            <p class="text-aurum-gold tracking-[0.3em] uppercase text-sm mb-4 font-semibold">Excellence in Motion</p>
+            <h1 class="text-5xl md:text-7xl font-serif font-bold text-white mb-6 leading-tight">
+                Drive the <span class="gold-gradient-text">Extraordinary</span>
+            </h1>
+            <p class="text-gray-300 text-lg md:text-xl mb-10 font-light max-w-2xl mx-auto">
+                Discover the world's most prestigious automotive engineering. From German precision to Italian passion.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#models" class="bg-aurum-gold text-black font-bold py-4 px-8 border border-aurum-gold hover:bg-aurum-yellow transition duration-300 uppercase tracking-wider">
+                    View Inventory
+                </a>
+                <a href="#brands" class="bg-transparent text-aurum-gold font-bold py-4 px-8 border border-aurum-gold hover:bg-aurum-gold hover:text-black transition duration-300 uppercase tracking-wider">
+                    Explore Brands
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brands Section -->
+    <section id="brands" class="py-24 bg-aurum-black relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in-up">
+                <h2 class="text-3xl md:text-4xl font-serif font-bold text-white mb-4">Elite Manufacturers</h2>
+                <div class="h-1 w-20 bg-aurum-gold mx-auto"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Mercedes -->
+                <div class="group relative overflow-hidden rounded-sm cursor-pointer fade-in-up delay-100">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-10 opacity-90"></div>
+                    <img src="https://images.unsplash.com/photo-1617788138017-80ad40651399?q=80&w=1000&auto=format&fit=crop" 
+                         alt="Mercedes" class="w-full h-96 object-cover transform group-hover:scale-110 transition duration-700">
+                    <div class="absolute bottom-0 left-0 p-6 z-20 w-full border-b-4 border-aurum-gold group-hover:border-aurum-yellow">
+                        <h3 class="text-2xl font-serif font-bold text-white mb-1">Mercedes-Benz</h3>
+                        <p class="text-gray-400 text-sm">German Precision</p>
+                    </div>
+                </div>
+
+                <!-- BMW -->
+                <div class="group relative overflow-hidden rounded-sm cursor-pointer fade-in-up delay-200">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-10 opacity-90"></div>
+                    <img src="https://images.unsplash.com/photo-1555215696-99ac45e75d8f?q=80&w=1000&auto=format&fit=crop" 
+                         alt="BMW" class="w-full h-96 object-cover transform group-hover:scale-110 transition duration-700">
+                    <div class="absolute bottom-0 left-0 p-6 z-20 w-full border-b-4 border-aurum-gold group-hover:border-aurum-yellow">
+                        <h3 class="text-2xl font-serif font-bold text-white mb-1">BMW</h3>
+                        <p class="text-gray-400 text-sm">Ultimate Driving Machine</p>
+                    </div>
+                </div>
+
+                <!-- Bugatti -->
+                <div class="group relative overflow-hidden rounded-sm cursor-pointer fade-in-up delay-300">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-10 opacity-90"></div>
+                    <img src="https://images.unsplash.com/photo-1600712242805-5f786716a576?q=80&w=1000&auto=format&fit=crop" 
+                         alt="Bugatti" class="w-full h-96 object-cover transform group-hover:scale-110 transition duration-700">
+                    <div class="absolute bottom-0 left-0 p-6 z-20 w-full border-b-4 border-aurum-gold group-hover:border-aurum-yellow">
+                        <h3 class="text-2xl font-serif font-bold text-white mb-1">Bugatti</h3>
+                        <p class="text-gray-400 text-sm">Beyond Speed</p>
+                    </div>
+                </div>
+
+                <!-- Lamborghini -->
+                <div class="group relative overflow-hidden rounded-sm cursor-pointer fade-in-up delay-400">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-10 opacity-90"></div>
+                    <img src="https://images.unsplash.com/photo-1544614471-3cb3d6d1981d?q=80&w=1000&auto=format&fit=crop" 
+                         alt="Lamborghini" class="w-full h-96 object-cover transform group-hover:scale-110 transition duration-700">
+                    <div class="absolute bottom-0 left-0 p-6 z-20 w-full border-b-4 border-aurum-gold group-hover:border-aurum-yellow">
+                        <h3 class="text-2xl font-serif font-bold text-white mb-1">Lamborghini</h3>
+                        <p class="text-gray-400 text-sm">Italian Fury</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Models -->
+    <section id="models" class="py-24 bg-aurum-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-end mb-12 fade-in-up">
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-serif font-bold text-white">Featured Models</h2>
+                    <p class="text-aurum-gold mt-2">Available for immediate delivery.</p>
+                </div>
+                <button class="hidden md:block text-white hover:text-aurum-gold transition">View All <i class="fas fa-arrow-right ml-2"></i></button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Model 1 -->
+                <div class="bg-aurum-black border border-gray-800 hover:border-aurum-gold transition duration-300 group fade-in-up">
+                    <div class="relative h-64 overflow-hidden">
+                        <span class="absolute top-4 right-4 bg-aurum-gold text-black text-xs font-bold px-3 py-1 z-10">IN STOCK</span>
+                        <img src="https://images.unsplash.com/photo-1614200179396-2bdb77ebf81b?q=80&w=1000&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Car">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-white mb-2">Mercedes-AMG GT</h3>
+                        <div class="flex justify-between text-gray-400 text-sm mb-4">
+                            <span><i class="fas fa-tachometer-alt text-aurum-gold mr-1"></i> 3.1s</span>
+                            <span><i class="fas fa-horse-head text-aurum-gold mr-1"></i> 720hp</span>
+                            <span><i class="fas fa-gas-pump text-aurum-gold mr-1"></i> Petrol</span>
+                        </div>
+                        <div class="flex justify-between items-center border-t border-gray-800 pt-4">
+                            <span class="text-xl font-bold text-aurum-gold">$145,000</span>
+                            <button class="text-white hover:text-aurum-yellow text-sm font-semibold">Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Model 2 -->
+                <div class="bg-aurum-black border border-gray-800 hover:border-aurum-gold transition duration-300 group fade-in-up delay-100">
+                    <div class="relative h-64 overflow-hidden">
+                        <span class="absolute top-4 right-4 bg-aurum-gold text-black text-xs font-bold px-3 py-1 z-10">NEW ARRIVAL</span>
+                        <img src="https://images.unsplash.com/photo-1592198084033-aade902d1aae?q=80&w=1000&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Car">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-white mb-2">Lamborghini Huracán</h3>
+                        <div class="flex justify-between text-gray-400 text-sm mb-4">
+                            <span><i class="fas fa-tachometer-alt text-aurum-gold mr-1"></i> 2.9s</span>
+                            <span><i class="fas fa-horse-head text-aurum-gold mr-1"></i> 630hp</span>
+                            <span><i class="fas fa-gas-pump text-aurum-gold mr-1"></i> V10</span>
+                        </div>
+                        <div class="flex justify-between items-center border-t border-gray-800 pt-4">
+                            <span class="text-xl font-bold text-aurum-gold">$260,000</span>
+                            <button class="text-white hover:text-aurum-yellow text-sm font-semibold">Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Model 3 -->
+                <div class="bg-aurum-black border border-gray-800 hover:border-aurum-gold transition duration-300 group fade-in-up delay-200">
+                    <div class="relative h-64 overflow-hidden">
+                        <span class="absolute top-4 right-4 bg-white text-black text-xs font-bold px-3 py-1 z-10">PRE-OWNED</span>
+                        <img src="https://images.unsplash.com/photo-1616422285623-13ff0162193c?q=80&w=1000&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Car">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-white mb-2">Bugatti Chiron Sport</h3>
+                        <div class="flex justify-between text-gray-400 text-sm mb-4">
+                            <span><i class="fas fa-tachometer-alt text-aurum-gold mr-1"></i> 2.4s</span>
+                            <span><i class="fas fa-horse-head text-aurum-gold mr-1"></i> 1500hp</span>
+                            <span><i class="fas fa-gas-pump text-aurum-gold mr-1"></i> W16</span>
+                        </div>
+                        <div class="flex justify-between items-center border-t border-gray-800 pt-4">
+                            <span class="text-xl font-bold text-aurum-gold">$3,400,000</span>
+                            <button class="text-white hover:text-aurum-yellow text-sm font-semibold">Details</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-24 bg-gradient-to-b from-aurum-black to-aurum-dark relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in-up">
+                <h2 class="text-3xl md:text-4xl font-serif font-bold text-white mb-4">Customer Services</h2>
+                <p class="text-gray-400">Premium care for your premium vehicle.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Service 1 -->
+                <div class="glass-panel p-8 text-center group hover:bg-aurum-gold/10 transition duration-300 fade-in-up">
+                    <div class="w-16 h-16 mx-auto bg-aurum-gold/10 rounded-full flex items-center justify-center mb-6 text-aurum-gold group-hover:bg-aurum-gold group-hover:text-black transition">
+                        <i class="fas fa-tools text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-3">Maintenance</h3>
+                    <p class="text-gray-400 text-sm">Certified mechanics specializing in high-performance engines.</p>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="glass-panel p-8 text-center group hover:bg-aurum-gold/10 transition duration-300 fade-in-up delay-100">
+                    <div class="w-16 h-16 mx-auto bg-aurum-gold/10 rounded-full flex items-center justify-center mb-6 text-aurum-gold group-hover:bg-aurum-gold group-hover:text-black transition">
+                        <i class="fas fa-file-invoice-dollar text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-3">Financing</h3>
+                    <p class="text-gray-400 text-sm">Exclusive financing options tailored to your lifestyle.</p>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="glass-panel p-8 text-center group hover:bg-aurum-gold/10 transition duration-300 fade-in-up delay-200">
+                    <div class="w-16 h-16 mx-auto bg-aurum-gold/10 rounded-full flex items-center justify-center mb-6 text-aurum-gold group-hover:bg-aurum-gold group-hover:text-black transition">
+                        <i class="fas fa-truck-moving text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-3">Home Delivery</h3>
+                    <p class="text-gray-400 text-sm">White-glove delivery service anywhere in the country.</p>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="glass-panel p-8 text-center group hover:bg-aurum-gold/10 transition duration-300 fade-in-up delay-300">
+                    <div class="w-16 h-16 mx-auto bg-aurum-gold/10 rounded-full flex items-center justify-center mb-6 text-aurum-gold group-hover:bg-aurum-gold group-hover:text-black transition">
+                        <i class="fas fa-headset text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-3">Concierge</h3>
+                    <p class="text-gray-400 text-sm">24/7 dedicated support for all your automotive needs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Accessories Section -->
+    <section id="accessories" class="py-24 bg-aurum-dark border-t border-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-12 fade-in-up">
+                <h2 class="text-3xl md:text-4xl font-serif font-bold text-white">Genuine Accessories</h2>
+                <div class="flex space-x-4 mt-4 md:mt-0">
+                    <button class="bg-aurum-gold text-black px-6 py-2 font-bold hover:bg-aurum-yellow transition">Shop All</button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Accessory 1 -->
+                <div class="group relative overflow-hidden fade-in-up">
+                    <div class="bg-white p-8 h-80 flex items-center justify-center relative">
+                        <img src="https://images.unsplash.com/photo-1563829288-5188f17ebba3?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition" alt="Rim">
+                        <div class="absolute inset-0 bg-black/40 group-hover:bg-transparent transition duration-300"></div>
+                    </div>
+                    <div class="p-4 bg-gray-900 border-b-2 border-aurum-gold">
+                        <h4 class="text-white font-bold">Forged Alloy Rims</h4>
+                        <p class="text-aurum-gold">$4,500 / set</p>
+                    </div>
+                </div>
+
+                <!-- Accessory 2 -->
+                <div class="group relative overflow-hidden fade-in-up delay-100">
+                    <div class="bg-white p-8 h-80 flex items-center justify-center relative">
+                        <img src="https://images.unsplash.com/photo-1600086827875-a63c01f6098c?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition" alt="Interior">
+                        <div class="absolute inset-0 bg-black/40 group-hover:bg-transparent transition duration-300"></div>
+                    </div>
+                    <div class="p-4 bg-gray-900 border-b-2 border-aurum-gold">
+                        <h4 class="text-white font-bold">Custom Leather Kits</h4>
+                        <p class="text-aurum-gold">From $2,100</p>
+                    </div>
+                </div>
+
+                <!-- Accessory 3 -->
+                <div class="group relative overflow-hidden fade-in-up delay-200">
+                    <div class="bg-white p-8 h-80 flex items-center justify-center relative">
+                        <img src="https://images.unsplash.com/photo-1552554628-8d0741280d96?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition" alt="Key">
+                        <div class="absolute inset-0 bg-black/40 group-hover:bg-transparent transition duration-300"></div>
+                    </div>
+                    <div class="p-4 bg-gray-900 border-b-2 border-aurum-gold">
+                        <h4 class="text-white font-bold">Carbon Fiber Trim</h4>
+                        <p class="text-aurum-gold">$850</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Help / Contact Section -->
+    <section id="help" class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-aurum-gold opacity-5"></div>
+        <div class="max-w-4xl mx-auto px-4 relative z-10 text-center">
+            <h2 class="text-3xl md:text-4xl font-serif font-bold text-white mb-6">Need Assistance?</h2>
+            <p class="text-gray-400 mb-10">Our specialists are standing by to answer your questions regarding inventory, service, or parts.</p>
+            
+            <form class="bg-aurum-black p-8 border border-gray-800 shadow-2xl max-w-lg mx-auto text-left fade-in-up">
+                <div class="mb-4">
+                    <label class="block text-gray-400 text-sm font-bold mb-2" for="name">Full Name</label>
+                    <input class="w-full bg-gray-900 border border-gray-700 text-white rounded py-3 px-4 focus:outline-none focus:border-aurum-gold focus:ring-1 focus:ring-aurum-gold" id="name" type="text" placeholder="John Doe">
+                </div>
+                <div class="mb-6">
+                    <label class="block text-gray-400 text-sm font-bold mb-2" for="email">Email Address</label>
+                    <input class="w-full bg-gray-900 border border-gray-700 text-white rounded py-3 px-4 focus:outline-none focus:border-aurum-gold focus:ring-1 focus:ring-aurum-gold" id="email" type="email" placeholder="john@example.com">
+                </div>
+                <div class="mb-6">
+                    <label class="block text-gray-400 text-sm font-bold mb-2" for="message">Message</label>
+                    <textarea class="w-full bg-gray-900 border border-gray-700 text-white rounded py-3 px-4 focus:outline-none focus:border-aurum-gold focus:ring-1 focus:ring-aurum-gold h-32" id="message" placeholder="I'm interested in the Bugatti..."></textarea>
+                </div>
+                <button type="button" class="w-full bg-aurum-gold hover:bg-aurum-yellow text-black font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300">
+                    Send Inquiry
+                </button>
+            </form>
+            
+            <div class="mt-10 flex flex-wrap justify-center gap-6">
+                <a href="#" class="text-gray-400 hover:text-aurum-gold flex items-center"><i class="fas fa-phone-alt mr-2"></i> +1 (800) 555-0199</a>
+                <a href="#" class="text-gray-400 hover:text-aurum-gold flex items-center"><i class="fas fa-envelope mr-2"></i> support@aurumauto.com</a>
+                <a href="#" class="text-gray-400 hover:text-aurum-gold flex items-center"><i class="fas fa-map-marker-alt mr-2"></i> 100 Luxury Lane, Beverly Hills, CA</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black border-t border-gray-900 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <div class="col-span-1 md:col-span-1">
+                    <span class="text-2xl font-serif font-bold text-aurum-gold tracking-widest">AURUM</span>
+                    <p class="mt-4 text-gray-500 text-sm">Defining luxury automotive excellence since 1985.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4 uppercase tracking-wider text-sm">Company</h4>
+                    <ul class="space-y-2 text-sm text-gray-500">
+                        <li><a href="#" class="hover:text-aurum-gold">About Us</a></li>
+                        <li><a href="#" class="hover:text-aurum-gold">Careers</a></li>
+                        <li><a href="#" class="hover:text-aurum-gold">Press</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4 uppercase tracking-wider text-sm">Support</h4>
+                    <ul class="space-y-2 text-sm text-gray-500">
+                        <li><a href="#" class="hover:text-aurum-gold">Help Center</a></li>
+                        <li><a href="#" class="hover:text-aurum-gold">Terms of Service</a></li>
+                        <li><a href="#" class="hover:text-aurum-gold">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4 uppercase tracking-wider text-sm">Connect</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-500 hover:text-aurum-gold transition"><i class="fab fa-instagram text-xl"></i></a>
+                        <a href="#" class="text-gray-500 hover:text-aurum-gold transition"><i class="fab fa-twitter text-xl"></i></a>
+                        <a href="#" class="text-gray-500 hover:text-aurum-gold transition"><i class="fab fa-facebook text-xl"></i></a>
+                        <a href="#" class="text-gray-500 hover:text-aurum-gold transition"><i class="fab fa-youtube text-xl"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-900 pt-8 text-center">
+                <p class="text-gray-600 text-xs">&copy; 2023 Aurum Automotive. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Scroll Animation Observer
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target); // Only animate once
+                    }
+                });
+            }, observerOptions);
+
+            const elements = document.querySelectorAll('.fade-in-up');
+            elements.forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>
