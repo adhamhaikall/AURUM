@@ -1,2 +1,0 @@
-# AURUM
-Car Corporation
